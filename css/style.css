@@ -1,0 +1,142 @@
+/* Basic Css for web page */
+* {
+  box-sizing: border-box;
+}
+:root {
+  --bg: #0b1020;
+  --card: #111729;
+  --muted: #93a1b1;
+  --text: #e6edf3;
+  --accent: #3b82f6;
+  --border: #22304a;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --radius: 12px;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  background: radial-gradient(1200px 600px at 70% -20%, #1b2a4a, transparent)
+    var(--bg);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Desginn Cover */
+.header {
+  text-align: center;
+  padding: 16px 20px;
+}
+.title {
+  margin: 0 0 4px;
+  font-size: clamp(22px, 3vw, 32px);
+}
+.subtitlee {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Viewer */
+#app {
+  max-width: 960px;
+  margin: 12px auto 24px;
+  padding: 16px;
+}
+.view {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  min-height: 70vh;
+  overflow: hidden;
+}
+.pdf {
+  width: 100%;
+  height: 78vh;
+  border: 0;
+  display: block;
+}
+
+/* spinner */
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    0deg,
+    rgba(11, 16, 32, 0.55),
+    rgba(11, 16, 32, 0.55)
+  );
+  z-index: 3;
+}
+.spinner::after {
+  content: "";
+  width: 42px;
+  height: 42px;
+  border: 4px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* buttons */
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: #0f1a33;
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  transition: transform 0.08s ease, border-color 0.2s ease;
+  display: inline-block;
+  margin-top: 14px;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: #2d4270;
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* altrnetive souluation */
+.anotherSoulatuion {
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* footer */
+
+footer {
+  color: var(--muted);
+  text-align: center;
+  padding: 16px 20px;
+}
