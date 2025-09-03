@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>interactive E-Book</title>
+    <link rel="icon" type="image/jpg" href="assets/icon.jpg" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- im gonna use jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="title">interactive E-Book</h1>
+      <p class="subtitlee">Cover -> Lesson -> Quizz</p>
+    </header>
+    <main id="app">
+      <!-- i used aria-live for "mainly for acessibliaty Screen readers with out interrupting" -->
+      <div class="view" aria-live="polite">
+        <div class="spinner" id="spinner" aria-hidden="true"></div>
+
+        <object
+          id="pdf-Viewr"
+          class="pdf"
+          type="application/pdf"
+          data="assets/pdf/Task Book.pdf#page=1&toolbar=&navpanes=0&scrollbar=0"
+          aria-label="pdf-Viewr"
+        >
+          <div class="anotherSoulatuion">
+            <p>its looks like your broweser cant display the e-book directly</p>
+            <a class="btn" href="assets/pdf/Task Book.pdf" download
+              >Download the e-book</a
+            >
+          </div>
+        </object>
+      </div>
+      <section>
+        <button id="startBtn" class="btn">Start 💡</button>
+      </section>
+    </main>
+    <footer>
+      <small> "Practicing" > Html5 + css + jquery </small>
+    </footer>
+
+    <!-- first page only cover  -->
+     <script src="js/main.js"></script>
+  </body>
+</html>
