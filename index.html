@@ -42,6 +42,31 @@
       </div>
       <section>
         <button id="startBtn" class="btn">Start 💡</button>
+
+        <!-- =================== additions (lesson + quiz) =================== -->
+        <!-- LESSON controls (hidden until Start) -->
+        <div id="lesson-controls" class="controls hide" aria-label="Lesson controls">
+          <button id="btnAudio" class="btn" aria-pressed="false">▶ Play</button>
+          <button id="btnNext" class="btn primary">Next → Quiz</button>
+
+          <!-- Audio file (keep path as your assets) -->
+          <audio id="narration" preload="metadata">
+            <source src="assets/pdf/audio/Task Audio.mp3" type="audio/mpeg" />
+          </audio>
+        </div>
+
+        <!-- QUIZ (hidden until Next) -->
+        <form id="quizBox" class="quiz hide" novalidate>
+          <fieldset>
+            <legend>Quick Check: Which option is correct?</legend>
+            <label class="choice"><input type="radio" name="q1" value="A"> A) Option A</label>
+            <label class="choice"><input type="radio" name="q1" value="B"> B) Option B</label>
+            <label class="choice"><input type="radio" name="q1" value="C" data-correct="true"> C) Option C</label>
+            <label class="choice"><input type="radio" name="q1" value="D"> D) Option D</label>
+          </fieldset>
+          <button type="submit" class="btn primary">Submit</button>
+        </form>
+        <!-- ================= /additions ================= -->
       </section>
     </main>
     <footer>
