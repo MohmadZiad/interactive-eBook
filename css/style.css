@@ -172,3 +172,6 @@ footer {
   gap: 8px;
   padding: 6px 0;
 }
+.choice.wrong { outline: 2px solid #ef4444; border-radius: 8px; }
+.choice.right { outline: 2px solid #10b981; border-radius: 8px; }
+.hide { display: none !important; } 

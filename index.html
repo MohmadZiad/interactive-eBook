@@ -13,7 +13,6 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
-    <script src="js/main.js"></script>
   </head>
   <body>
     <header class="header">
@@ -29,12 +28,12 @@
           id="pdf-Viewr"
           class="pdf"
           type="application/pdf"
-          data="assets/pdf/Task Book.pdf#page=1&toolbar=&navpanes=0&scrollbar=0"
+          data="assets/pdf/coverBook.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
           aria-label="pdf-Viewr"
         >
           <div class="anotherSoulatuion">
             <p>its looks like your broweser cant display the e-book directly</p>
-            <a class="btn" href="assets/pdf/Task Book.pdf" download
+            <a class="btn" href="assets/pdf/coverBook.pdf" download
               >Download the e-book</a
             >
           </div>
@@ -43,30 +42,81 @@
       <section>
         <button id="startBtn" class="btn">Start 💡</button>
 
-        <!-- =================== additions (lesson + quiz) =================== -->
-        <!-- LESSON controls (hidden until Start) -->
-        <div id="lesson-controls" class="controls hide" aria-label="Lesson controls">
+        <!-- LESSON controls  -->
+        <div
+          id="lesson-controls"
+          class="controls hide"
+          aria-label="Lesson controls"
+        >
           <button id="btnAudio" class="btn" aria-pressed="false">▶ Play</button>
           <button id="btnNext" class="btn primary">Next → Quiz</button>
 
-          <!-- Audio file (keep path as your assets) -->
+          <!-- Audio file  -->
           <audio id="narration" preload="metadata">
             <source src="assets/pdf/audio/Task Audio.mp3" type="audio/mpeg" />
           </audio>
         </div>
 
-        <!-- QUIZ (hidden until Next) -->
-        <form id="quizBox" class="quiz hide" novalidate>
-          <fieldset>
-            <legend>Quick Check: Which option is correct?</legend>
-            <label class="choice"><input type="radio" name="q1" value="A"> A) Option A</label>
-            <label class="choice"><input type="radio" name="q1" value="B"> B) Option B</label>
-            <label class="choice"><input type="radio" name="q1" value="C" data-correct="true"> C) Option C</label>
-            <label class="choice"><input type="radio" name="q1" value="D"> D) Option D</label>
-          </fieldset>
-          <button type="submit" class="btn primary">Submit</button>
-        </form>
-        <!-- ================= /additions ================= -->
+        <!-- QUIZ-->
+        <div id="quizBox" class="quiz hide">
+          <form class="quiz-form" data-step="1" novalidate>
+            <fieldset>
+              <legend>Q1: Why was Nessie upset?</legend>
+              <label class="choice"
+                ><input type="radio" name="q1" value="A" /> A) She was
+                tired.</label
+              >
+              <label class="choice"
+                ><input type="radio" name="q1" value="B" data-correct="true" />
+                B) She had to go home.</label
+              >
+              <label class="choice"
+                ><input type="radio" name="q1" value="C" /> C) She doesn’t like
+                playing tag.</label
+              >
+            </fieldset>
+            <button type="submit" class="btn primary">Submit</button>
+          </form>
+
+          <form class="quiz-form hide" data-step="2" novalidate>
+            <fieldset>
+              <legend>Q2: What did Nessie do to keep calm?</legend>
+              <label class="choice"
+                ><input type="radio" name="q2" value="A" /> A) She
+                shouted.</label
+              >
+              <label class="choice"
+                ><input type="radio" name="q2" value="B" data-correct="true" />
+                B) She counted to ten.</label
+              >
+              <label class="choice"
+                ><input type="radio" name="q2" value="C" /> C) She cried.</label
+              >
+            </fieldset>
+            <button type="submit" class="btn primary">Submit</button>
+          </form>
+
+          <form class="quiz-form hide" data-step="3" novalidate>
+            <fieldset>
+              <legend>Q3: What did her friends do?</legend>
+              <label class="choice"
+                ><input type="radio" name="q3" value="A" data-correct="true" />
+                A) They thanked her.</label
+              >
+              <label class="choice"
+                ><input type="radio" name="q3" value="B" /> B) They ignored
+                her.</label
+              >
+              <label class="choice"
+                ><input type="radio" name="q3" value="C" /> C) They yelled at
+                her.</label
+              >
+            </fieldset>
+            <button type="submit" class="btn primary">Submit</button>
+          </form>
+
+          <button id="nextQuestionBtn" class="btn hide">Next Question →</button>
+        </div>
       </section>
     </main>
     <footer>
@@ -74,6 +124,6 @@
     </footer>
 
     <!-- first page only cover  -->
-     <script src="js/main.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

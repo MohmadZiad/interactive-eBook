@@ -1,4 +1,3 @@
-/* Interactive E-Book — COVER ONLY */
 (function ($) {
   "use strict";
 
@@ -11,7 +10,7 @@
   const $startBtn = $("#startBtn");
 
   const rawData = $pdf.attr("data") || "assets/pdf/coverBook.pdf";
-  const basePdf = rawData.split("#")[0].replace(/ /g, "%20"); // => assets/pdf/Task%20Book.pdf
+  const basePdf = rawData.split("#")[0].replace(/ /g, "%20");
   const viewerOpts = "toolbar=0&navpanes=0&scrollbar=0";
 
   const pdfUrl = (page) => `${basePdf}#page=${page}&${viewerOpts}`;
@@ -56,17 +55,40 @@
 
   renderCover();
 
-  /* =====================[ additions without touching your code above ]===================== */
-
-  // بسيط: تعريف عناصر الواجهه الجديدة لو كانت موجودة بـ HTML
   const $lessonUI = $("#lesson-controls");
   const $quizBox = $("#quizBox");
   const $btnAudio = $("#btnAudio");
   const $btnNext = $("#btnNext");
   const narration = document.getElementById("narration");
 
-  // ترتيب الصفحات داخل نفس PDF (عدّل الأرقام لو غير هيك)
+  const PDF_MODE = "separate";
+
+  const FILES = {
+    cover: "assets/pdf/coverBook.pdf",
+    lesson: "assets/pdf/lesson.pdf",
+    quiz: "assets/pdf/quizz.pdf",
+  };
+
   const PAGES = { cover: 1, lesson: 2, quiz: 3 };
+
+  function loadStep(which) {
+    if (PDF_MODE === "separate") {
+      const file = FILES[which];
+      const url = `${file}#${viewerOpts}`;
+      $spinner.css("display", "flex");
+      $pdf.attr("data", url);
+
+      $pdf.off("load").on("load", function () {
+        $spinner.hide();
+      });
+
+      setTimeout(function () {
+        if ($spinner.is(":visible")) $spinner.hide();
+      }, 1200);
+    } else {
+      loadPDF(PAGES[which] || 1);
+    }
+  }
 
   // اظهار/اخفاء واجهات وتحميل الصفحة المطلوبة
   function go(step) {
@@ -77,14 +99,14 @@
       try {
         narration && narration.pause();
       } catch (e) {}
-      loadPDF(PAGES.cover);
+      loadStep("cover");
       return;
     }
     if (step === "lesson") {
       $startBtn.addClass("hide");
       $lessonUI.removeClass("hide");
       $quizBox.addClass("hide");
-      loadPDF(PAGES.lesson);
+      loadStep("lesson");
       return;
     }
     if (step === "quiz") {
@@ -94,7 +116,7 @@
       try {
         narration && narration.pause();
       } catch (e) {}
-      loadPDF(PAGES.quiz);
+      loadStep("quiz");
       return;
     }
   }
@@ -122,17 +144,45 @@
     go("quiz");
   });
 
-  $quizBox.on("submit", function (e) {
+  const $quizForms = $(".quiz-form");
+  const $nextQ = $("#nextQuestionBtn");
+  let currentStep = 1;
+
+  // فحص كل سؤال لحاله
+  $quizForms.on("submit", function (e) {
     e.preventDefault();
-    const selected = $quizBox.find('input[name="q1"]:checked').get(0);
+
+    const $form = $(this);
+    const step = parseInt($form.data("step"), 10);
+
+    $form.find(".choice").removeClass("wrong right");
+
+    const selected = $form.find("input[type=radio]:checked").get(0);
     if (!selected) {
       alert("Please choose an answer.");
       return;
     }
+
+    const $label = $(selected).closest(".choice");
+
     if (selected.hasAttribute("data-correct")) {
+      $label.addClass("right");
       alert("Correct!");
+      if (step < $quizForms.length) {
+        $nextQ.removeClass("hide");
+      } else {
+        alert("You finished all questions! 🎉");
+      }
     } else {
+      $label.addClass("wrong");
       alert("Try Again!");
     }
+  });
+
+  $nextQ.on("click", function () {
+    $quizForms.addClass("hide");
+    currentStep++;
+    $quizForms.filter(`[data-step=${currentStep}]`).removeClass("hide");
+    $nextQ.addClass("hide");
   });
 })(jQuery);
